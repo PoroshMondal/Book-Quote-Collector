@@ -16,4 +16,10 @@
     <!-- Home Screen -->
     <string name="add_quote">Add Quote</string>
     <string name="extended_fab_content_desc">Add Quote of Books Quote Collection</string>
+
+    <!-- Add Quote Screen -->
+    <string name="hint_books_title">Books Title</string>
+    <string name="hint_author">Author</string>
+    <string name="hint_quote">Quote</string>
+    <string name="hint_quote_category">Quote Category</string>
 </resources>
