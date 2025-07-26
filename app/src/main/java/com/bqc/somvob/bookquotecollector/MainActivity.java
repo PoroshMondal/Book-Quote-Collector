@@ -1,6 +1,7 @@
 package com.bqc.somvob.bookquotecollector;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -46,4 +47,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);*/
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_search) {
+            Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.menu_settings) {
+            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.menu_exit) {
+            Toast.makeText(MainActivity.this, "Exit", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

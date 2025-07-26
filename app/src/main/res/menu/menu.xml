@@ -2,24 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--<item android:id="@+id/menu_limit"
-        android:icon="@drawable/ic_report"
-        android:title="@string/menu_limit"
-        app:showAsAction="never"/>
+    <item android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/menu_settings"
+        app:showAsAction="always"/>
 
-    <item android:id="@+id/menu_compare_expense"
-        android:icon="@drawable/ic_report"
-        android:title="@string/menu_compare_expense"
-        app:showAsAction="never"/>
-
-    <item android:id="@+id/menu_privacy_policy"
-        android:icon="@drawable/ic_report"
-        android:title="@string/menu_privacy_policy"
+    <item android:id="@+id/menu_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/menu_settings"
         app:showAsAction="never"/>
 
     <item android:id="@+id/menu_exit"
-        android:icon="@drawable/ic_report"
+        android:icon="@drawable/ic_exit"
         android:title="@string/menu_exit"
-        app:showAsAction="never"/>-->
+        app:showAsAction="never"/>
 
 </menu>

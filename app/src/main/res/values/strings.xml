@@ -4,6 +4,12 @@
     <!-- bottom nav title -->
     <string name="collections">Collections</string>
     <string name="favorites">Favorites</string>
+
+    <!-- top bar menu -->
+    <string name="menu_search">Search</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_exit">Exit</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
