@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bqc.somvob.bookquotecollector.databinding.FragmentQuoteDetailsBinding;
 
@@ -17,7 +18,7 @@ public class QuoteDetails extends Fragment {
     private FragmentQuoteDetailsBinding binding;
 
     public QuoteDetails() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -26,7 +27,7 @@ public class QuoteDetails extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentQuoteDetailsBinding.inflate(inflater,container,false);
         return binding.getRoot();
@@ -35,5 +36,18 @@ public class QuoteDetails extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        binding.btnEdit.setOnClickListener(edit -> {
+            Toast.makeText(requireActivity(), "Edit", Toast.LENGTH_SHORT).show();
+        });
+
+        binding.btnFav.setOnClickListener(fav->{
+            Toast.makeText(requireActivity(), "Fav", Toast.LENGTH_SHORT).show();
+        });
+
+        binding.btnDelete.setOnClickListener(delete->{
+            Toast.makeText(requireActivity(), "Delete", Toast.LENGTH_SHORT).show();
+        });
+
     }
 }

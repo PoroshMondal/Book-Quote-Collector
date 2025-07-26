@@ -7,113 +7,123 @@
 
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
+        android:fillViewport="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_book_titles"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:hint="@string/hint_books_title"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeWidth="2dp"
-            app:endIconMode="none"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp">
+            android:orientation="vertical"
+            android:layout_margin="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_title"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_book_titles"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/text_color_day_night" />
+                android:elevation="10dp"
+                android:hint="@string/hint_books_title"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="none"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/text_color_day_night" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_book_author"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:hint="@string/hint_author"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeWidth="2dp"
-            app:endIconMode="none"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_author"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_book_author"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/text_color_day_night" />
+                android:elevation="10dp"
+                android:hint="@string/hint_author"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="none"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_author"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/text_color_day_night" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_quote"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:hint="@string/hint_quote"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeWidth="2dp"
-            app:endIconMode="none"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_quote"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_quote"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/text_color_day_night" />
+                android:elevation="10dp"
+                android:hint="@string/hint_quote"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="none"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_quote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:minLines="3"
+                    android:gravity="top"
+                    android:textColor="@color/text_color_day_night" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_quote_category"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:hint="@string/hint_quote_category"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeWidth="2dp"
-            app:endIconMode="none"
-            android:layout_marginTop="2dp"
-            android:layout_marginBottom="2dp">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_quote_category"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layout_quote_category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/text_color_day_night" />
+                android:elevation="10dp"
+                android:hint="@string/hint_quote_category"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="none"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_quote_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/text_color_day_night" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_add"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            app:cornerRadius="10dp"
-            android:elevation="4dp"
-            android:text="@string/add_quote"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:textAllCaps="false"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="2dp"
-            android:layout_gravity="end"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                app:cornerRadius="10dp"
+                android:elevation="4dp"
+                android:text="@string/add_quote"
+                android:textSize="16sp"
+                android:textStyle="normal"
+                android:textAllCaps="false"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp"
+                android:layout_gravity="end"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </layout>

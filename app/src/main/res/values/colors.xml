@@ -19,6 +19,8 @@
     <color name="text_color_msg">#7CB342</color>
     <color name="color_grey_black">#5A5A5A</color>
 
+    <color name="grey_100">#F5F5F5</color>
+
     <color name="color_dialog_title">#4FC3F7</color>
 
     <color name="color_divider">#E9F6F6</color>
