@@ -12,4 +12,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Home Screen -->
+    <string name="add_quote">Add Quote</string>
+    <string name="extended_fab_content_desc">Add Quote of Books Quote Collection</string>
 </resources>
