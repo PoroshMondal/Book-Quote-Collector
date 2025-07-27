@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.bqc.somvob.bookquotecollector.databinding.FragmentSettingsBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class Settings extends Fragment {
 
     private FragmentSettingsBinding binding;

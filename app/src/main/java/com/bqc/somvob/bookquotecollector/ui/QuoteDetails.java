@@ -13,6 +13,9 @@ import android.widget.Toast;
 
 import com.bqc.somvob.bookquotecollector.databinding.FragmentQuoteDetailsBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class QuoteDetails extends Fragment {
 
     private FragmentQuoteDetailsBinding binding;

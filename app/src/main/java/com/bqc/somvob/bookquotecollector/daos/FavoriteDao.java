@@ -1,5 +1,6 @@
 package com.bqc.somvob.bookquotecollector.daos;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -18,7 +19,8 @@ public interface FavoriteDao {
     @Delete
     void removeFavorite(Favorite favorite);
 
-    @Query("SELECT q.* FROM quotes q INNER JOIN favorite f ON q.id = f.quoteId ORDER BY ID DESC")
-    List<Quotes> getFavoriteQuotes();
+    //@Query("SELECT q.* FROM quotes q INNER JOIN favorite f ON q.id = f.favId ORDER BY ID DESC")
+    @Query("SELECT q.* FROM quotes q INNER JOIN favorite f ON q.id = f.favId")
+    LiveData<List<Quotes>> getFavoriteQuotes();
 
 }

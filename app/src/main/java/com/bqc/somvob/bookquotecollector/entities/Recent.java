@@ -22,4 +22,25 @@ public class Recent {
 
     @ColumnInfo(name = "quoteId")
     public int quoteId;
+
+    public Recent(int recentId, int quoteId) {
+        this.recentId = recentId;
+        this.quoteId = quoteId;
+    }
+
+    public int getRecentId() {
+        return recentId;
+    }
+
+    public void setRecentId(int recentId) {
+        this.recentId = recentId;
+    }
+
+    public int getQuoteId() {
+        return quoteId;
+    }
+
+    public void setQuoteId(int quoteId) {
+        this.quoteId = quoteId;
+    }
 }

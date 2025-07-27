@@ -22,4 +22,25 @@ public class Favorite {
 
     @ColumnInfo(name = "quoteId")
     public int quoteId;
+
+    public Favorite(int favId, int quoteId) {
+        this.favId = favId;
+        this.quoteId = quoteId;
+    }
+
+    public int getFavId() {
+        return favId;
+    }
+
+    public void setFavId(int favId) {
+        this.favId = favId;
+    }
+
+    public int getQuoteId() {
+        return quoteId;
+    }
+
+    public void setQuoteId(int quoteId) {
+        this.quoteId = quoteId;
+    }
 }

@@ -1,5 +1,6 @@
 package com.bqc.somvob.bookquotecollector.daos;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -15,7 +16,7 @@ public interface QuotesDao {
     void insertQuote(Quotes quote);
 
     @Query("SELECT * FROM quotes")
-    List<Quotes> getAllQuotes();
+    LiveData<List<Quotes>> getAllQuotes();
 
     @Delete
     void deleteQuote(Quotes quote);

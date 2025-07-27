@@ -7,12 +7,13 @@ import com.bqc.somvob.bookquotecollector.daos.QuotesDao;
 import com.bqc.somvob.bookquotecollector.daos.RecentDao;
 import com.bqc.somvob.bookquotecollector.db.QuoteDatabase;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
-import jakarta.inject.Singleton;
 
 @Module
 @InstallIn(SingletonComponent.class)

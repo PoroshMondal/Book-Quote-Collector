@@ -1,5 +1,6 @@
 package com.bqc.somvob.bookquotecollector.daos;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -12,11 +13,11 @@ import java.util.List;
 @Dao
 public interface RecentDao {
     @Insert
-    void addRecent(Recent recent);
+    void insertRecentQuotes(Recent recent);
 
     @Query("SELECT q.* FROM quotes q INNER JOIN recent r ON q.id = r.quoteId ORDER BY ID DESC")
-    List<Quotes> getRecentQuotes();
+    LiveData<List<Quotes>> getRecentQuotes();
 
     @Query("DELETE FROM recent")
-    void clearTable();
+    void clearAllRecentQuotes();
 }

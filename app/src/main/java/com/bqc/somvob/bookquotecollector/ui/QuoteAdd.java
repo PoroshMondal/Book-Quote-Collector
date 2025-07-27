@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.bqc.somvob.bookquotecollector.databinding.FragmentQuoteAddBinding;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class QuoteAdd extends Fragment {
 
     private FragmentQuoteAddBinding binding;
