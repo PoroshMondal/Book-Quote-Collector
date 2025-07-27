@@ -1,18 +1,23 @@
 package com.bqc.somvob.bookquotecollector;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.bqc.somvob.bookquotecollector.databinding.ActivityMainBinding;
+import com.bqc.somvob.bookquotecollector.ui.Home;
 import com.bqc.somvob.bookquotecollector.viewModels.QuoteViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -41,8 +46,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId()==R.id.nav_collections){
+                    navigateToFragmentIfNotCurrent(R.id.home_main);
                     Toast.makeText(MainActivity.this,"Collections",Toast.LENGTH_SHORT).show();
                 }else if (item.getItemId()==R.id.nav_fav){
+                    navigateToFragmentIfNotCurrent(R.id.home_main);
                     Toast.makeText(MainActivity.this,"Fav",Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -56,6 +63,23 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);*/
 
     }
+
+    private void navigateToFragmentIfNotCurrent(int fragmentId) {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_main); // your NavHostFragment ID
+
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+            NavDestination currentDestination = navController.getCurrentDestination();
+
+            if (currentDestination != null && currentDestination.getId() != fragmentId) {
+                navController.navigate(fragmentId);
+            } else {
+                Log.d("Navigation", "Already on the target fragment.");
+            }
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

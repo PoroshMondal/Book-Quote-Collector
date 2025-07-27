@@ -70,7 +70,7 @@ public class Home extends Fragment {
         //quoteViewModel.insertFavorite(new Favorite(1,1));
         quoteViewModel.getAllFavorites().observe(getViewLifecycleOwner(),data ->{
             if (data!=null){
-                Toast.makeText(requireActivity(), "Fav: " + data.get(0).getQuote(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(requireActivity(), "Fav: " + data.get(0).getQuote(), Toast.LENGTH_SHORT).show();
             }
         });
 

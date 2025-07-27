@@ -6,11 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bqc.somvob.bookquotecollector.R;
 import com.bqc.somvob.bookquotecollector.databinding.FragmentQuoteAddBinding;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
 import com.bqc.somvob.bookquotecollector.viewModels.QuoteViewModel;
@@ -21,6 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class QuoteAdd extends Fragment {
 
     private FragmentQuoteAddBinding binding;
+    private NavController navController;
     private QuoteViewModel quoteViewModel;
 
     public QuoteAdd() {
@@ -42,24 +46,28 @@ public class QuoteAdd extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        navController = NavHostFragment.findNavController(this);
         quoteViewModel = new ViewModelProvider(requireActivity()).get(QuoteViewModel.class);
 
         binding.btnAdd.setOnClickListener(v -> {
             if (validate()){
-                String title = binding.etTitle.text.toString();
-                String author = binding.etAuthor.text.toString();
-                String quote = binding.etQuote.text.toString();
-                String category = binding.etQuoteCategory.text.toString();
+                String title = binding.etTitle.getText().toString().trim();
+                String author = binding.etAuthor.getText().toString().trim();
+                String quote = binding.etQuote.getText().toString().trim();
+                String category = binding.etQuoteCategory.getText().toString().trim();
 
-                Quotes quotes = new Quotes(1,title,author,quote,category);
+                Quotes quotes = new Quotes(0,title,author,quote,category);
                 quoteViewModel.insertQuote(quotes);
+
+                navController.navigate(R.id.home_main);
+
             }
         });
 
     }
 
     private boolean validate(){
-        if (binding.etQuote.text.toString().empty()){
+        if (binding.etQuote.getText().toString().isEmpty()){
             binding.layoutQuote.setError("Required!");
             return false;
         }
