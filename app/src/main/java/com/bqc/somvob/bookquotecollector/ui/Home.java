@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import com.bqc.somvob.bookquotecollector.MainActivity;
 import com.bqc.somvob.bookquotecollector.R;
+import com.bqc.somvob.bookquotecollector.adapters.QuoteAdapter;
 import com.bqc.somvob.bookquotecollector.databinding.FragmentHomeBinding;
 import com.bqc.somvob.bookquotecollector.entities.Favorite;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
@@ -30,6 +33,7 @@ public class Home extends Fragment {
     private NavController navController;
 
     private QuoteViewModel quoteViewModel;
+    private QuoteAdapter adapter;
 
     public Home() {
         // Required empty public constructor
@@ -52,6 +56,9 @@ public class Home extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = NavHostFragment.findNavController(this);
         quoteViewModel = new ViewModelProvider(requireActivity()).get(QuoteViewModel.class);
+        adapter = new QuoteAdapter();
+
+        setRecyclerView();
 
         /*quoteViewModel.insertQuote(new Quotes(
                 1,
@@ -59,13 +66,14 @@ public class Home extends Fragment {
                 "Author",
                 "afhdsklfa asdhfls fkldsfj fjdkls fjklslafjdka jlasfkj ",
                 "Sample Category"
-        ));
+        ));*/
 
-        quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), data -> {
-            if (data!=null){
-                Toast.makeText(requireActivity(), "Quotes: " + data.get(0).getId(), Toast.LENGTH_SHORT).show();
+        quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quoteList -> {
+            if (quoteList!=null){
+                Toast.makeText(requireActivity(), "Quotes: " + quoteList.get(0).getId(), Toast.LENGTH_SHORT).show();
+                adapter.submitList(quoteList);
             }
-        });*/
+        });
 
         //quoteViewModel.insertFavorite(new Favorite(1,1));
         quoteViewModel.getAllFavorites().observe(getViewLifecycleOwner(),data ->{
@@ -79,7 +87,14 @@ public class Home extends Fragment {
             Toast.makeText(requireActivity(), "Add Auote", Toast.LENGTH_SHORT).show();
         });
 
-
-
     }
+
+    private void setRecyclerView(){
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        binding.recyclerView.setHasFixedSize(false);
+        binding.recyclerView.setNestedScrollingEnabled(false);
+        //binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
+    }
+
 }
