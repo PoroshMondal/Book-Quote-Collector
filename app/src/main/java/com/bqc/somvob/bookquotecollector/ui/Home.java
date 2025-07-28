@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,8 @@ public class Home extends Fragment {
     private QuoteViewModel quoteViewModel;
     private QuoteAdapter adapter;
 
+    private MainActivity mActivity;
+
     public Home() {
         // Required empty public constructor
     }
@@ -42,6 +45,7 @@ public class Home extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = (MainActivity) getActivity();
     }
 
     @Override
@@ -59,14 +63,7 @@ public class Home extends Fragment {
         adapter = new QuoteAdapter();
 
         setRecyclerView();
-
-        /*quoteViewModel.insertQuote(new Quotes(
-                1,
-                "Title",
-                "Author",
-                "afhdsklfa asdhfls fkldsfj fjdkls fjklslafjdka jlasfkj ",
-                "Sample Category"
-        ));*/
+        hideShowBottomNavFav();
 
         quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quoteList -> {
             if (quoteList!=null){
@@ -95,6 +92,30 @@ public class Home extends Fragment {
         binding.recyclerView.setHasFixedSize(false);
         binding.recyclerView.setNestedScrollingEnabled(false);
         //binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
+
+        adapter.setOnQuoteClickListener(quote -> {
+            Toast.makeText(getContext(), "Clicked: " + quote.getId(), Toast.LENGTH_SHORT).show();
+            navController.navigate(R.id.quoteDetails);
+        });
+    }
+
+    private void hideShowBottomNavFav(){
+        binding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) { // Scroll down
+                    binding.extendedFab.hide();
+                    mActivity.binding.bottomNavigation.setVisibility(View.GONE);
+                } else if (dy < 0) { // Scroll up
+                    binding.extendedFab.show();
+                    mActivity.binding.bottomNavigation.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        mActivity.binding.bottomNavigation.animate().translationY(mActivity.binding.bottomNavigation.getHeight()).setDuration(400);
+        mActivity.binding.bottomNavigation.animate().translationY(0).setDuration(400);
     }
 
 }

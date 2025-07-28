@@ -11,11 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bqc.somvob.bookquotecollector.databinding.SingleRowQuoteBinding;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
+import com.bqc.somvob.bookquotecollector.interfaces.OnQuoteClickListener;
 
 public class QuoteAdapter extends ListAdapter<Quotes, QuoteAdapter.ViewHolder> {
 
+    private OnQuoteClickListener clickListener;
+
     public QuoteAdapter() {
         super(DIFF_CALLBACK);
+    }
+
+    public void setOnQuoteClickListener(OnQuoteClickListener listener) {
+        this.clickListener = listener;
     }
 
     private static final DiffUtil.ItemCallback<Quotes> DIFF_CALLBACK = new DiffUtil.ItemCallback<Quotes>() {
@@ -51,6 +58,12 @@ public class QuoteAdapter extends ListAdapter<Quotes, QuoteAdapter.ViewHolder> {
 
         public void bind(Quotes quotes, int position){
             binding.setQuoteModel(quotes);
+
+            binding.getRoot().setOnClickListener(v -> {
+                if (clickListener != null) {
+                    clickListener.onQuoteItemClick(quotes);
+                }
+            });
         }
 
     }
