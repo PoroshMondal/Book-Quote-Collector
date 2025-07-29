@@ -64,7 +64,6 @@ public class QuoteDetails extends Fragment {
         opViewModel = new ViewModelProvider(requireActivity()).get(OperationalViewModel.class);
 
         Quotes quotes = opViewModel.getQuotesData();
-        //Toast.makeText(requireActivity(), opViewModel.getQuotesData().getQuote() + "Edit", Toast.LENGTH_SHORT).show();
 
         favBtnVisibleHide(quotes.getId());
 
@@ -74,7 +73,7 @@ public class QuoteDetails extends Fragment {
 
         binding.btnEdit.setOnClickListener(edit -> {
             opViewModel.setIsForUpdate(true);
-            navController.navigate(R.id.quoteAdd);
+            navController.navigate(R.id.quoteAdd, null, mActivity.clearBackStack());
         });
 
         binding.btnFav.setOnClickListener(fav->{
@@ -85,6 +84,7 @@ public class QuoteDetails extends Fragment {
 
         binding.btnDelete.setOnClickListener(delete->{
             quoteViewModel.removeFavorite(quotes.getId());
+            opViewModel.setIsFromCollection(false);
             navController.navigate(R.id.home_main, null, mActivity.clearBackStack());
 
         });

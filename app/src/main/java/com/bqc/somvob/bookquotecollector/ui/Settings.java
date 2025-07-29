@@ -18,7 +18,7 @@ public class Settings extends Fragment {
     private FragmentSettingsBinding binding;
 
     public Settings() {
-        // Required empty public constructor
+        
     }
 
     @Override

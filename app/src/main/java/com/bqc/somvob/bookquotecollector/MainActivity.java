@@ -75,9 +75,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public NavOptions clearBackStack(){
-        // clears everything
         return new NavOptions.Builder()
-                .setPopUpTo(R.id.nav_graph, true) // clears everything
+                .setPopUpTo(R.id.nav_graph, true)
                 .build();
     }
 

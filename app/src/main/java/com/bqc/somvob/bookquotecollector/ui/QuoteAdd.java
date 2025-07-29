@@ -37,7 +37,7 @@ public class QuoteAdd extends Fragment {
     private int quoteId = 0;
 
     public QuoteAdd() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -88,11 +88,12 @@ public class QuoteAdd extends Fragment {
                 if (validate()){
                     Quotes quotes = new Quotes(quoteId,title,author,quote,category);
                     quoteViewModel.updateQuote(quotes);
+                    opViewModel.setIsForUpdate(false);
                 }
             }
 
+            opViewModel.setIsFromCollection(true);
             navController.navigate(R.id.home_main, null, mActivity.clearBackStack());
-            //navController.navigate(R.id.home_main);
 
         });
 
@@ -110,13 +111,11 @@ public class QuoteAdd extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(requireActivity(), "on Stop", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDestroy() {
-        Toast.makeText(requireActivity(), "on Destroy", Toast.LENGTH_SHORT).show();
-        opViewModel.setIsForUpdate(false);
         super.onDestroy();
+        //opViewModel.setIsForUpdate(false);
     }
 }
