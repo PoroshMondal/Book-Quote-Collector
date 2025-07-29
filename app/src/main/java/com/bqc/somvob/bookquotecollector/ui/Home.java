@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +28,7 @@ import com.bqc.somvob.bookquotecollector.entities.Favorite;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
 import com.bqc.somvob.bookquotecollector.viewModels.OperationalViewModel;
 import com.bqc.somvob.bookquotecollector.viewModels.QuoteViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -134,6 +136,10 @@ public class Home extends Fragment {
             navController.navigate(R.id.quoteDetails, null, mActivity.clearBackStack());
             //navController.navigate(R.id.quoteDetails);
         });
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeCallback);
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView);
+
     }
 
     private void hideShowBottomNavFav(){
@@ -156,5 +162,38 @@ public class Home extends Fragment {
         mActivity.binding.bottomNavigation.animate().translationY(mActivity.binding.bottomNavigation.getHeight()).setDuration(400);
         mActivity.binding.bottomNavigation.animate().translationY(0).setDuration(400);
     }
+
+    ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+        private Quotes recentlyDeletedQuote;
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView,
+                              @NonNull RecyclerView.ViewHolder viewHolder,
+                              @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+
+            recentlyDeletedQuote = adapter.getCurrentList().get(position);
+            Log.i("home","swipe: " + recentlyDeletedQuote.getTitle());
+            //adapter.submitList(adapter.getCurrentList());
+
+            // Delete from DB
+            quoteViewModel.deleteQuote(recentlyDeletedQuote);
+
+            // Show Snackbar for undo
+            Snackbar.make(binding.recyclerView, "Quote deleted", Snackbar.LENGTH_LONG)
+                    .setAction("UNDO", v -> {
+                        // Re-insert if undone
+                        quoteViewModel.insertQuote(recentlyDeletedQuote);
+                    })
+                    .show();
+        }
+    };
+
 
 }

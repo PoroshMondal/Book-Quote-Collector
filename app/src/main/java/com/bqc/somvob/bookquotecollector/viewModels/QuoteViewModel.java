@@ -47,7 +47,7 @@ public class QuoteViewModel extends ViewModel {
     }
 
     public void deleteQuote(Quotes quote){
-        repository.deleteQuote(quote);
+        executorService.execute(() -> repository.deleteQuote(quote));
     }
 
     public LiveData<List<Quotes>> searchQuotes(String sQuery){
