@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bqc.somvob.bookquotecollector.MainActivity;
 import com.bqc.somvob.bookquotecollector.R;
 import com.bqc.somvob.bookquotecollector.databinding.FragmentQuoteAddBinding;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
@@ -27,6 +29,7 @@ public class QuoteAdd extends Fragment {
 
     private FragmentQuoteAddBinding binding;
     private NavController navController;
+    private MainActivity mActivity;
 
     private QuoteViewModel quoteViewModel;
     private OperationalViewModel opViewModel;
@@ -40,6 +43,7 @@ public class QuoteAdd extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mActivity = (MainActivity) getActivity();
     }
 
     @Override
@@ -87,8 +91,9 @@ public class QuoteAdd extends Fragment {
                 }
             }
 
-            navController.navigate(R.id.home_main);
-            
+            navController.navigate(R.id.home_main, null, mActivity.clearBackStack());
+            //navController.navigate(R.id.home_main);
+
         });
 
     }

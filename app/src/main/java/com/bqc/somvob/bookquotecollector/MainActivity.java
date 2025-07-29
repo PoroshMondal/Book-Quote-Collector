@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -66,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
         // Connect BottomNavigationView with NavController
         NavigationUI.setupWithNavController(bottomNavigationView, navController);*/
 
+    }
+
+    public NavOptions clearBackStack(){
+        // clears everything
+        return new NavOptions.Builder()
+                .setPopUpTo(R.id.nav_graph, true) // clears everything
+                .build();
     }
 
     private void navigateToFragmentIfNotCurrent(int fragmentId) {

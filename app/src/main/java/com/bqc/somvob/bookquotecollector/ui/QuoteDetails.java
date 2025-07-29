@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -80,6 +81,9 @@ public class QuoteDetails extends Fragment {
         binding.btnDelete.setOnClickListener(delete->{
             quoteViewModel.removeFavorite(quotes.getId());
             Toast.makeText(requireActivity(), "Delete " +quotes.getId(), Toast.LENGTH_SHORT).show();
+
+            navController.navigate(R.id.home_main, null, mActivity.clearBackStack());
+
         });
 
     }

@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -82,7 +83,8 @@ public class Home extends Fragment {
         });
 
         binding.extendedFab.setOnClickListener(fabButton -> {
-            navController.navigate(R.id.quoteAdd);
+            navController.navigate(R.id.quoteAdd, null, mActivity.clearBackStack());
+            //navController.navigate(R.id.quoteAdd);
         });
 
     }
@@ -112,7 +114,8 @@ public class Home extends Fragment {
 
         adapter.setOnQuoteClickListener(quote -> {
             opViewModel.setQuotesData(quote);
-            navController.navigate(R.id.quoteDetails);
+            navController.navigate(R.id.quoteDetails, null, mActivity.clearBackStack());
+            //navController.navigate(R.id.quoteDetails);
         });
     }
 

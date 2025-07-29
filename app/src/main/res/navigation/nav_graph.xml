@@ -14,15 +14,24 @@
         android:id="@+id/quoteAdd"
         android:name="com.bqc.somvob.bookquotecollector.ui.QuoteAdd"
         android:label="fragment_quote_add"
+        app:popUpToInclusive="true"
+        app:popUpToSaveState = "false"
+        app:restoreState = "false"
         tools:layout="@layout/fragment_quote_add" />
     <fragment
         android:id="@+id/quoteDetails"
         android:name="com.bqc.somvob.bookquotecollector.ui.QuoteDetails"
         android:label="fragment_quote_details"
+        app:popUpToInclusive="true"
+        app:popUpToSaveState = "false"
+        app:restoreState = "false"
         tools:layout="@layout/fragment_quote_details" />
     <fragment
         android:id="@+id/settings"
         android:name="com.bqc.somvob.bookquotecollector.ui.Settings"
         android:label="fragment_settings"
+        app:popUpToInclusive="false"
+        app:popUpToSaveState = "false"
+        app:restoreState = "false"
         tools:layout="@layout/fragment_settings" />
 </navigation>
