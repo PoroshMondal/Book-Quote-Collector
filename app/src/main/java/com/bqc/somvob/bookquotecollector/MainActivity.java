@@ -71,12 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*NavHostFragment navHostFragment =
-                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_fav);
-        navController = navHostFragment.getNavController();
-        // Connect BottomNavigationView with NavController
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);*/
-
     }
 
     public NavOptions clearBackStack(){
@@ -85,11 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 
-    //NavController navController;
     private void navigateToFragmentIfNotCurrent(int fragmentId) {
-        /*NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_content_main);*/
-
         if (navHostFragment != null) {
             navController = navHostFragment.getNavController();
             NavDestination currentDestination = navController.getCurrentDestination();

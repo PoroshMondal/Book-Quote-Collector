@@ -147,17 +147,17 @@ public class Home extends Fragment {
                 if (dy > 0) {
                     // Scroll down
                     binding.extendedFab.hide();
-                    mActivity.binding.bottomNavigation.setVisibility(View.GONE);
+                    //mActivity.binding.bottomNavigation.setVisibility(View.GONE);
                 } else if (dy < 0) {
                     // Scroll up
                     binding.extendedFab.show();
-                    mActivity.binding.bottomNavigation.setVisibility(View.VISIBLE);
+                    //mActivity.binding.bottomNavigation.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        mActivity.binding.bottomNavigation.animate().translationY(mActivity.binding.bottomNavigation.getHeight()).setDuration(400);
-        mActivity.binding.bottomNavigation.animate().translationY(0).setDuration(400);
+        binding.extendedFab.animate().translationY(binding.extendedFab.getHeight()).setDuration(400);
+        binding.extendedFab.animate().translationY(0).setDuration(400);
     }
 
     ItemTouchHelper.SimpleCallback swipeCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

@@ -8,8 +8,10 @@ Built with clean architecture and room database for a smooth and responsive expe
 
 ## 📸 Screenshots
 
-> *app screenshots `./screenshots/home_screen.png`*
-
+> * `[Screenshot_1.png](screenshots/Screenshot_1.png)`*
+> * `[Screenshot_2.png](screenshots/Screenshot_2.png)`
+> * `[Screenshot_3.png](screenshots/Screenshot_3.png)`
+> * `[Screenshot_4.png](screenshots/Screenshot_4.png)`
 ---
 
 ## 📘 Features
@@ -64,7 +66,7 @@ This project follows the **MVVM architecture pattern**, using:
 
 ## 📁 APK Download
 
-You can download the latest APK [here](#)
+You can download the latest APK [here](https://drive.google.com/file/d/1P_URY2kNFLDQWhf1Ee_gaXrmvlLfSqNq/view?usp=sharing)
 
 ---
 
