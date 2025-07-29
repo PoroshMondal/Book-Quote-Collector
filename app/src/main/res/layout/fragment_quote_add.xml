@@ -115,6 +115,7 @@
                 app:cornerRadius="10dp"
                 android:elevation="4dp"
                 android:text="@string/add_quote"
+                android:textColor="@color/text_color_day_night"
                 android:textSize="16sp"
                 android:textStyle="normal"
                 android:textAllCaps="false"

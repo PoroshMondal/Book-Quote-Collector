@@ -25,6 +25,7 @@
             android:layout_gravity="bottom|end"
             android:contentDescription="@string/extended_fab_content_desc"
             android:text="@string/add_quote"
+            android:textColor="@color/text_color_day_night"
             android:textAllCaps="false"
             app:icon="@drawable/ic_add"/>
 
