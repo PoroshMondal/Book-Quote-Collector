@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
 
+import java.util.List;
+
 public class OperationalViewModel extends ViewModel {
     private MutableLiveData<Boolean> isFromCollection = new MutableLiveData<>();
 
@@ -38,4 +40,14 @@ public class OperationalViewModel extends ViewModel {
         this.quotesData.setValue(quotes);
     }
 
+    /// //
+    private MutableLiveData<List<Quotes>> searchQuotes = new MutableLiveData<>();
+
+    public MutableLiveData<List<Quotes>> getSearchQuotes() {
+        return searchQuotes;
+    }
+
+    public void setSearchQuotes(List<Quotes> searchQuotes) {
+        this.searchQuotes.postValue(searchQuotes);
+    }
 }

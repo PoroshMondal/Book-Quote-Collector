@@ -98,10 +98,6 @@ public class QuoteAdd extends Fragment {
 
     }
 
-    private void submitQuotes(){
-
-    }
-
     private boolean validate(){
         if (binding.etQuote.getText().toString().isEmpty()){
             binding.layoutQuote.setError("Required!");

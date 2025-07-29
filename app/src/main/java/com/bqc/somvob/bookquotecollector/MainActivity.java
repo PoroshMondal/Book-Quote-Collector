@@ -8,7 +8,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -18,11 +20,14 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.bqc.somvob.bookquotecollector.databinding.ActivityMainBinding;
+import com.bqc.somvob.bookquotecollector.entities.Quotes;
 import com.bqc.somvob.bookquotecollector.ui.Home;
 import com.bqc.somvob.bookquotecollector.viewModels.OperationalViewModel;
 import com.bqc.somvob.bookquotecollector.viewModels.QuoteViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -96,6 +101,38 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
+
+        MenuItem searchItem = menu.findItem(R.id.menu_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                //Log.i("mainactivity","Search data: close");
+                return false;
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                String sQuery = s;
+                quoteViewModel.searchQuotes(sQuery).observe(MainActivity.this, new Observer<List<Quotes>>() {
+                    @Override
+                    public void onChanged(List<Quotes> quotes) {
+                        if (quotes!=null && !quotes.isEmpty()){
+                            opViewModel.setSearchQuotes(quotes);
+                            Log.i("mainactivity","Search data: " +quotes.get(0).getQuote() + quotes.get(0).getTitle());
+                        }
+                    }
+                });
+                return true;
+            }
+        });
         return true;
     }
 

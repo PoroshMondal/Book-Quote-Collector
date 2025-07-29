@@ -50,6 +50,10 @@ public class QuoteViewModel extends ViewModel {
         repository.deleteQuote(quote);
     }
 
+    public LiveData<List<Quotes>> searchQuotes(String sQuery){
+        return repository.searchQuotes(sQuery);
+    }
+
     // Favorite
     public LiveData<List<Quotes>> getAllFavorites() {
         return repository.getAllFavorites();

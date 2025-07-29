@@ -45,6 +45,10 @@ public class QuoteRepository {
         quoteDao.deleteQuote(quote);
     }
 
+    public LiveData<List<Quotes>> searchQuotes(String sQuery){
+        return quoteDao.searchQuotes(sQuery);
+    }
+
     // Favorite operations
     public LiveData<List<Quotes>> getAllFavorites() {
         return favoriteDao.getFavoriteQuotes();

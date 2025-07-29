@@ -85,6 +85,8 @@ public class Home extends Fragment {
             }
         });
 
+        searchQuotes();
+
         binding.extendedFab.setOnClickListener(fabButton -> {
             navController.navigate(R.id.quoteAdd, null, mActivity.clearBackStack());
             //navController.navigate(R.id.quoteAdd);
@@ -108,6 +110,14 @@ public class Home extends Fragment {
                 Log.i("homescreen","Fav data: " + quoteList);
                 //adapter.submitList(quoteList);
                 adapter.submitList(new ArrayList<>(quoteList));
+            }
+        });
+    }
+
+    private void searchQuotes(){
+        opViewModel.getSearchQuotes().observe(getViewLifecycleOwner(), quotes -> {
+            if (quotes!=null && !quotes.isEmpty()){
+                adapter.submitList(new ArrayList<>(quotes));
             }
         });
     }

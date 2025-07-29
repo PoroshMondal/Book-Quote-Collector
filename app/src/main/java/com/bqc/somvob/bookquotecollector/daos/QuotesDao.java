@@ -23,6 +23,9 @@ public interface QuotesDao {
     @Query("SELECT * FROM quotes")
     LiveData<List<Quotes>> getAllQuotes();
 
+    @Query("SELECT * FROM quotes WHERE book_title LIKE :sQuery OR author LIKE :sQuery OR category LIKE :sQuery OR quote LIKE :sQuery")
+    LiveData<List<Quotes>> searchQuotes(String sQuery);
+
     @Delete
     void deleteQuote(Quotes quote);
 
