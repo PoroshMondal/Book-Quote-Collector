@@ -17,8 +17,11 @@ public interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertFavorite(Favorite favorite);
 
-    @Delete
-    void removeFavorite(Favorite favorite);
+    /*@Delete
+    void removeFavorite(Favorite favorite);*/
+
+    @Query("DELETE FROM favorite WHERE quoteId = :id")
+    void removeFavorite(int id);
 
     //@Query("SELECT q.* FROM quotes q INNER JOIN favorite f ON q.id = f.favId ORDER BY ID DESC")
     @Query("SELECT q.* FROM quotes q INNER JOIN favorite f ON q.id = f.favId")

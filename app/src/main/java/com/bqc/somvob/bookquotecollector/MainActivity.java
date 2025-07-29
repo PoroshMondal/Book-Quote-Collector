@@ -18,6 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.bqc.somvob.bookquotecollector.databinding.ActivityMainBinding;
 import com.bqc.somvob.bookquotecollector.ui.Home;
+import com.bqc.somvob.bookquotecollector.viewModels.OperationalViewModel;
 import com.bqc.somvob.bookquotecollector.viewModels.QuoteViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     //private NavController navController;
 
     private QuoteViewModel quoteViewModel;
+    private OperationalViewModel opViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,17 +42,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         quoteViewModel = new ViewModelProvider(this).get(QuoteViewModel.class);
+        opViewModel = new ViewModelProvider(this).get(OperationalViewModel.class);
+        opViewModel.setIsFromCollection(true);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId()==R.id.nav_collections){
+                    opViewModel.setIsFromCollection(true);
                     navigateToFragmentIfNotCurrent(R.id.home_main);
-                    Toast.makeText(MainActivity.this,"Collections",Toast.LENGTH_SHORT).show();
                 }else if (item.getItemId()==R.id.nav_fav){
+                    opViewModel.setIsFromCollection(false);
                     navigateToFragmentIfNotCurrent(R.id.home_main);
-                    Toast.makeText(MainActivity.this,"Fav",Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }

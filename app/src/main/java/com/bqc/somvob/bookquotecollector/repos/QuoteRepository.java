@@ -50,8 +50,8 @@ public class QuoteRepository {
         favoriteDao.insertFavorite(favorite);
     }
 
-    public void removeFavorite(Favorite favorite) {
-        favoriteDao.removeFavorite(favorite);
+    public void removeFavorite(int id) {
+        favoriteDao.removeFavorite(id);
     }
 
     // Recent operations

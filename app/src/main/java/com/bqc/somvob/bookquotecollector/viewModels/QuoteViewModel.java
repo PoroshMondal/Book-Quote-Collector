@@ -56,8 +56,8 @@ public class QuoteViewModel extends ViewModel {
         //repository.insertFavorite(favorite);
     }
 
-    public void removeFavorite(Favorite favorite) {
-        repository.removeFavorite(favorite);
+    public void removeFavorite(int id) {
+        executorService.execute(() -> repository.removeFavorite(id));
     }
 
     // Recent

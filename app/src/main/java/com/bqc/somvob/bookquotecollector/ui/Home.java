@@ -23,6 +23,7 @@ import com.bqc.somvob.bookquotecollector.adapters.QuoteAdapter;
 import com.bqc.somvob.bookquotecollector.databinding.FragmentHomeBinding;
 import com.bqc.somvob.bookquotecollector.entities.Favorite;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
+import com.bqc.somvob.bookquotecollector.viewModels.OperationalViewModel;
 import com.bqc.somvob.bookquotecollector.viewModels.QuoteViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -34,6 +35,8 @@ public class Home extends Fragment {
     private NavController navController;
 
     private QuoteViewModel quoteViewModel;
+    private OperationalViewModel opViewModel;
+
     private QuoteAdapter adapter;
 
     private MainActivity mActivity;
@@ -58,32 +61,46 @@ public class Home extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         navController = NavHostFragment.findNavController(this);
+
         quoteViewModel = new ViewModelProvider(requireActivity()).get(QuoteViewModel.class);
+        opViewModel = new ViewModelProvider(requireActivity()).get(OperationalViewModel.class);
+
         adapter = new QuoteAdapter();
 
         setRecyclerView();
         hideShowBottomNavFav();
 
-        quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quoteList -> {
-            if (quoteList!=null){
-                Toast.makeText(requireActivity(), "Quotes: " + quoteList.get(0).getId(), Toast.LENGTH_SHORT).show();
-                adapter.submitList(quoteList);
-            }
-        });
-
-        //quoteViewModel.insertFavorite(new Favorite(1,1));
-        quoteViewModel.getAllFavorites().observe(getViewLifecycleOwner(),data ->{
-            if (data!=null){
-                //Toast.makeText(requireActivity(), "Fav: " + data.get(0).getQuote(), Toast.LENGTH_SHORT).show();
+        opViewModel.getIsFromCollection().observe(getViewLifecycleOwner(), value ->{
+            //Toast.makeText(requireActivity(), "Value: " + value, Toast.LENGTH_SHORT).show();
+            if (value){
+                getAllQuotes();
+            }else {
+                getAllFavorites();
             }
         });
 
         binding.extendedFab.setOnClickListener(fabButton -> {
             navController.navigate(R.id.quoteAdd);
-            Toast.makeText(requireActivity(), "Add Auote", Toast.LENGTH_SHORT).show();
         });
 
+    }
+
+    private void getAllQuotes() {
+        quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quoteList -> {
+            if (quoteList != null) {
+                adapter.submitList(quoteList);
+            }
+        });
+    }
+
+    private void getAllFavorites() {
+        quoteViewModel.getAllFavorites().observe(getViewLifecycleOwner(), quoteList -> {
+            if (quoteList != null) {
+                adapter.submitList(quoteList);
+            }
+        });
     }
 
     private void setRecyclerView(){
@@ -94,7 +111,7 @@ public class Home extends Fragment {
         //binding.recyclerView.addItemDecoration(new DividerItemDecoration(requireActivity(), DividerItemDecoration.VERTICAL));
 
         adapter.setOnQuoteClickListener(quote -> {
-            Toast.makeText(getContext(), "Clicked: " + quote.getId(), Toast.LENGTH_SHORT).show();
+            opViewModel.setQuotesData(quote);
             navController.navigate(R.id.quoteDetails);
         });
     }
@@ -104,10 +121,12 @@ public class Home extends Fragment {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) { // Scroll down
+                if (dy > 0) {
+                    // Scroll down
                     binding.extendedFab.hide();
                     mActivity.binding.bottomNavigation.setVisibility(View.GONE);
-                } else if (dy < 0) { // Scroll up
+                } else if (dy < 0) {
+                    // Scroll up
                     binding.extendedFab.show();
                     mActivity.binding.bottomNavigation.setVisibility(View.VISIBLE);
                 }
