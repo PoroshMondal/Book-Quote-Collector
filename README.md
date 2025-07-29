@@ -11,7 +11,7 @@ Built with clean architecture and room database for a smooth and responsive expe
 > * `[Screenshot_1.png](screenshots/Screenshot_1.png)`*
 > * `[Screenshot_2.png](screenshots/Screenshot_2.png)`
 > * `[Screenshot_3.png](screenshots/Screenshot_3.png)`
-> * `[Screenshot_4.png](screenshots/Screenshot_4.png)`
+> * `[Screenshot_4.png](screenshots/Screenshot_4.png)`![Screenshot_4.png](screenshots/Screenshot_4.png)
 ---
 
 ## 📘 Features
