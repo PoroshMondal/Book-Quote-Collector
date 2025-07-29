@@ -1,6 +1,7 @@
 package com.bqc.somvob.bookquotecollector.viewModels;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.bqc.somvob.bookquotecollector.entities.Favorite;
@@ -61,7 +62,15 @@ public class QuoteViewModel extends ViewModel {
 
     public void insertFavorite(Favorite favorite) {
         executorService.execute(() -> repository.insertFavorite(favorite));
-        //repository.insertFavorite(favorite);
+    }
+
+    public LiveData<Integer> isFavoriteExists(int quoteId){
+        MutableLiveData<Integer> result = new MutableLiveData<>();
+        executorService.execute(() -> {
+            int count = repository.isFavoriteExists(quoteId);
+            result.postValue(count);
+        });
+        return result;
     }
 
     public void removeFavorite(int id) {

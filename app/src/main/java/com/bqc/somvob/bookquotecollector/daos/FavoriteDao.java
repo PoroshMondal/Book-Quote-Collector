@@ -17,8 +17,8 @@ public interface FavoriteDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertFavorite(Favorite favorite);
 
-    /*@Delete
-    void removeFavorite(Favorite favorite);*/
+    @Query("SELECT COUNT(*) FROM favorite WHERE quoteId = :quoteId")
+    int isFavoriteExists(int quoteId);
 
     @Query("DELETE FROM favorite WHERE quoteId = :id")
     void removeFavorite(int id);

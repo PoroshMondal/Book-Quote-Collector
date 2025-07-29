@@ -1,5 +1,6 @@
 package com.bqc.somvob.bookquotecollector.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,7 @@ public class QuoteDetails extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -63,6 +65,8 @@ public class QuoteDetails extends Fragment {
 
         Quotes quotes = opViewModel.getQuotesData();
         //Toast.makeText(requireActivity(), opViewModel.getQuotesData().getQuote() + "Edit", Toast.LENGTH_SHORT).show();
+
+        favBtnVisibleHide(quotes.getId());
 
         binding.txtTitle.setText(quotes.getTitle());
         binding.txtAuthor.setText(quotes.getAuthor());
@@ -75,16 +79,28 @@ public class QuoteDetails extends Fragment {
 
         binding.btnFav.setOnClickListener(fav->{
             quoteViewModel.insertFavorite(new Favorite(0,quotes.getId()));
-            Toast.makeText(requireActivity(), "Fav", Toast.LENGTH_SHORT).show();
+            binding.btnFav.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_filled));
+            binding.btnDelete.setVisibility(View.VISIBLE);
         });
 
         binding.btnDelete.setOnClickListener(delete->{
             quoteViewModel.removeFavorite(quotes.getId());
-            Toast.makeText(requireActivity(), "Delete " +quotes.getId(), Toast.LENGTH_SHORT).show();
-
             navController.navigate(R.id.home_main, null, mActivity.clearBackStack());
 
         });
 
     }
+
+
+    private void favBtnVisibleHide(int id){
+        quoteViewModel.isFavoriteExists(id).observe(getViewLifecycleOwner(), value -> {
+            if (value>0){
+                binding.btnFav.setImageDrawable(getResources().getDrawable(R.drawable.ic_favorite_filled));
+                binding.btnDelete.setVisibility(View.VISIBLE);
+            }else {
+                binding.btnDelete.setVisibility(View.GONE);
+            }
+        });
+    }
+
 }

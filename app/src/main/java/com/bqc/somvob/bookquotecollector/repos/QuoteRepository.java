@@ -58,6 +58,10 @@ public class QuoteRepository {
         favoriteDao.insertFavorite(favorite);
     }
 
+    public int isFavoriteExists(int quoteId){
+        return favoriteDao.isFavoriteExists(quoteId);
+    }
+
     public void removeFavorite(int id) {
         favoriteDao.removeFavorite(id);
     }

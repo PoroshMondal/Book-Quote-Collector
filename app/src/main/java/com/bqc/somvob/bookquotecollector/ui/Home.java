@@ -48,7 +48,7 @@ public class Home extends Fragment {
     private MainActivity mActivity;
 
     public Home() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -91,7 +91,6 @@ public class Home extends Fragment {
 
         binding.extendedFab.setOnClickListener(fabButton -> {
             navController.navigate(R.id.quoteAdd, null, mActivity.clearBackStack());
-            //navController.navigate(R.id.quoteAdd);
         });
 
     }
@@ -99,7 +98,6 @@ public class Home extends Fragment {
     private void getAllQuotes() {
         quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quoteList -> {
             if (quoteList != null) {
-                //adapter.submitList(quoteList);
                 adapter.submitList(new ArrayList<>(quoteList));
             }
         });
@@ -110,7 +108,6 @@ public class Home extends Fragment {
             Log.i("homescreen","Fav data: " + quoteList);
             if (quoteList != null) {
                 Log.i("homescreen","Fav data: " + quoteList);
-                //adapter.submitList(quoteList);
                 adapter.submitList(new ArrayList<>(quoteList));
             }
         });
@@ -180,15 +177,11 @@ public class Home extends Fragment {
 
             recentlyDeletedQuote = adapter.getCurrentList().get(position);
             Log.i("home","swipe: " + recentlyDeletedQuote.getTitle());
-            //adapter.submitList(adapter.getCurrentList());
 
-            // Delete from DB
             quoteViewModel.deleteQuote(recentlyDeletedQuote);
 
-            // Show Snackbar for undo
             Snackbar.make(binding.recyclerView, "Quote deleted", Snackbar.LENGTH_LONG)
                     .setAction("UNDO", v -> {
-                        // Re-insert if undone
                         quoteViewModel.insertQuote(recentlyDeletedQuote);
                     })
                     .show();
