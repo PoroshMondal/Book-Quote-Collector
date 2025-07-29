@@ -31,6 +31,8 @@ public class QuoteAdd extends Fragment {
     private QuoteViewModel quoteViewModel;
     private OperationalViewModel opViewModel;
 
+    private int quoteId = 0;
+
     public QuoteAdd() {
         // Required empty public constructor
     }
@@ -56,6 +58,8 @@ public class QuoteAdd extends Fragment {
 
         opViewModel.getIsForUpdate().observe(getViewLifecycleOwner(), value -> {
             if (value){
+                quoteId = opViewModel.getQuotesData().getId();
+
                 binding.etTitle.setText(opViewModel.getQuotesData().getTitle());
                 binding.etAuthor.setText(opViewModel.getQuotesData().getAuthor());
                 binding.etQuote.setText(opViewModel.getQuotesData().getQuote());
@@ -66,30 +70,31 @@ public class QuoteAdd extends Fragment {
         });
 
         binding.btnAdd.setOnClickListener(v -> {
-
-            if (binding.btnAdd.getText().toString().equalsIgnoreCase(getString(R.string.add_quote))){
-                submitQuotes();
-            }else {
-                submitQuotes();
-            }
-
-        });
-
-    }
-
-    private void submitQuotes(){
-        if (validate()){
             String title = binding.etTitle.getText().toString().trim();
             String author = binding.etAuthor.getText().toString().trim();
             String quote = binding.etQuote.getText().toString().trim();
             String category = binding.etQuoteCategory.getText().toString().trim();
 
-            Quotes quotes = new Quotes(0,title,author,quote,category);
-            quoteViewModel.insertQuote(quotes);
+            if (binding.btnAdd.getText().toString().equalsIgnoreCase(getString(R.string.add_quote))){
+                if (validate()){
+                    Quotes quotes = new Quotes(0,title,author,quote,category);
+                    quoteViewModel.insertQuote(quotes);
+                }
+            }else {
+                if (validate()){
+                    Quotes quotes = new Quotes(quoteId,title,author,quote,category);
+                    quoteViewModel.updateQuote(quotes);
+                }
+            }
 
             navController.navigate(R.id.home_main);
+            
+        });
 
-        }
+    }
+
+    private void submitQuotes(){
+
     }
 
     private boolean validate(){

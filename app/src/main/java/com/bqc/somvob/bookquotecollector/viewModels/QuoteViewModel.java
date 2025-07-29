@@ -42,6 +42,10 @@ public class QuoteViewModel extends ViewModel {
         executorService.execute(() -> repository.insertQuote(quote));
     }
 
+    public void updateQuote(Quotes quote) {
+        executorService.execute(() -> repository.updateQuote(quote));
+    }
+
     public void deleteQuote(Quotes quote){
         repository.deleteQuote(quote);
     }

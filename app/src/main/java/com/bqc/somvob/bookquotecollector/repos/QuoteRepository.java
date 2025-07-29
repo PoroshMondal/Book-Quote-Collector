@@ -37,6 +37,10 @@ public class QuoteRepository {
         quoteDao.insertQuote(quote);
     }
 
+    public void updateQuote(Quotes quote) {
+        quoteDao.updateQuote(quote);
+    }
+
     public void deleteQuote(Quotes quote){
         quoteDao.deleteQuote(quote);
     }
