@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
     public ActivityMainBinding binding;
     private BottomNavigationView bottomNavigationView;
-    //private NavController navController;
+    NavHostFragment navHostFragment;
+    private NavController navController;
 
     private QuoteViewModel quoteViewModel;
     private OperationalViewModel opViewModel;
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_main);
+        navController = navHostFragment.getNavController();
 
         quoteViewModel = new ViewModelProvider(this).get(QuoteViewModel.class);
         opViewModel = new ViewModelProvider(this).get(OperationalViewModel.class);
@@ -80,12 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 .build();
     }
 
+    //NavController navController;
     private void navigateToFragmentIfNotCurrent(int fragmentId) {
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_content_main); // your NavHostFragment ID
+        /*NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_content_main);*/
 
         if (navHostFragment != null) {
-            NavController navController = navHostFragment.getNavController();
+            navController = navHostFragment.getNavController();
             NavDestination currentDestination = navController.getCurrentDestination();
 
             if (currentDestination != null && currentDestination.getId() != fragmentId) {
@@ -139,11 +145,12 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_search) {
-            Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.menu_settings) {
-            Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+            navController.navigate(R.id.settings, null, clearBackStack());
+            //Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.menu_exit) {
-            Toast.makeText(MainActivity.this, "Exit", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this, "Exit", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
     }

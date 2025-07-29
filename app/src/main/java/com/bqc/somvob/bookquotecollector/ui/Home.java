@@ -79,7 +79,7 @@ public class Home extends Fragment {
         hideShowBottomNavFav();
 
         opViewModel.getIsFromCollection().observe(getViewLifecycleOwner(), value ->{
-            Toast.makeText(requireActivity(), "Value: " + value, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(requireActivity(), "Value: " + value, Toast.LENGTH_SHORT).show();
             if (value){
                 getAllQuotes();
             }else {
