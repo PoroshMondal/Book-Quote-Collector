@@ -16,10 +16,18 @@ public class OperationalViewModel extends ViewModel {
         this.isFromCollection.postValue(isFromCollection);
     }
 
-    public void setQuotesData(MutableLiveData<Quotes> quotesData) {
-        this.quotesData = quotesData;
+    /// /
+    private MutableLiveData<Boolean> isForUpdate = new MutableLiveData<>();
+
+    public MutableLiveData<Boolean> getIsForUpdate() {
+        return isForUpdate;
     }
 
+    public void setIsForUpdate(Boolean isForUpdate) {
+        this.isForUpdate.postValue(isForUpdate);
+    }
+
+    /// /
     private MutableLiveData<Quotes> quotesData = new MutableLiveData<>();
 
     public Quotes getQuotesData() {

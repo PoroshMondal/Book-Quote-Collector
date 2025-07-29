@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bqc.somvob.bookquotecollector.MainActivity;
+import com.bqc.somvob.bookquotecollector.R;
 import com.bqc.somvob.bookquotecollector.databinding.FragmentQuoteDetailsBinding;
 import com.bqc.somvob.bookquotecollector.entities.Favorite;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
@@ -25,6 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class QuoteDetails extends Fragment {
 
     private FragmentQuoteDetailsBinding binding;
+    private NavController navController;
 
     private QuoteViewModel quoteViewModel;
     private OperationalViewModel opViewModel;
@@ -52,6 +56,7 @@ public class QuoteDetails extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        navController = NavHostFragment.findNavController(this);
         quoteViewModel = new ViewModelProvider(requireActivity()).get(QuoteViewModel.class);
         opViewModel = new ViewModelProvider(requireActivity()).get(OperationalViewModel.class);
 
@@ -63,7 +68,8 @@ public class QuoteDetails extends Fragment {
         binding.txtQuoteDetails.setText(quotes.getQuote());
 
         binding.btnEdit.setOnClickListener(edit -> {
-            Toast.makeText(requireActivity(), "Edit", Toast.LENGTH_SHORT).show();
+            opViewModel.setIsForUpdate(true);
+            navController.navigate(R.id.quoteAdd);
         });
 
         binding.btnFav.setOnClickListener(fav->{
@@ -73,7 +79,7 @@ public class QuoteDetails extends Fragment {
 
         binding.btnDelete.setOnClickListener(delete->{
             quoteViewModel.removeFavorite(quotes.getId());
-            //Toast.makeText(requireActivity(), "Delete", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Delete " +quotes.getId(), Toast.LENGTH_SHORT).show();
         });
 
     }
