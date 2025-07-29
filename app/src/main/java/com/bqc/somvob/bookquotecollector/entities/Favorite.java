@@ -14,7 +14,7 @@ import androidx.room.PrimaryKey;
                 childColumns = "quoteId",
                 onDelete = ForeignKey.CASCADE
         ),
-        indices = {@Index(value = "quoteId")}
+        indices = {@Index(value = "quoteId", unique = true)}
 )
 public class Favorite {
     @PrimaryKey(autoGenerate = true)

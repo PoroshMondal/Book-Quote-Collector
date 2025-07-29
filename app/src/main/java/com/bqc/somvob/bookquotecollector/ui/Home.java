@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import com.bqc.somvob.bookquotecollector.entities.Favorite;
 import com.bqc.somvob.bookquotecollector.entities.Quotes;
 import com.bqc.somvob.bookquotecollector.viewModels.OperationalViewModel;
 import com.bqc.somvob.bookquotecollector.viewModels.QuoteViewModel;
+
+import java.util.ArrayList;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -74,7 +77,7 @@ public class Home extends Fragment {
         hideShowBottomNavFav();
 
         opViewModel.getIsFromCollection().observe(getViewLifecycleOwner(), value ->{
-            //Toast.makeText(requireActivity(), "Value: " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireActivity(), "Value: " + value, Toast.LENGTH_SHORT).show();
             if (value){
                 getAllQuotes();
             }else {
@@ -92,15 +95,19 @@ public class Home extends Fragment {
     private void getAllQuotes() {
         quoteViewModel.getAllQuotes().observe(getViewLifecycleOwner(), quoteList -> {
             if (quoteList != null) {
-                adapter.submitList(quoteList);
+                //adapter.submitList(quoteList);
+                adapter.submitList(new ArrayList<>(quoteList));
             }
         });
     }
 
     private void getAllFavorites() {
         quoteViewModel.getAllFavorites().observe(getViewLifecycleOwner(), quoteList -> {
+            Log.i("homescreen","Fav data: " + quoteList);
             if (quoteList != null) {
-                adapter.submitList(quoteList);
+                Log.i("homescreen","Fav data: " + quoteList);
+                //adapter.submitList(quoteList);
+                adapter.submitList(new ArrayList<>(quoteList));
             }
         });
     }
